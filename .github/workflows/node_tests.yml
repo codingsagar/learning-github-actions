@@ -1,0 +1,34 @@
+# First we have to name the workflow
+
+name : Node.js Tests
+
+# Then trigger, like which event will trigger this workflow
+# The below trigger will happen when we will push the code to the main branch
+
+on :
+  push :
+    branches :
+      - main
+
+# We need to define jobs, a workflow consists of one or more jobs
+# And each job run in its own env like Windows,Linux..
+
+jobs :
+  test : 
+    runs-on : ubuntu-latest
+  
+    steps : 
+      - name : Checkout Repository
+        uses : actions/checkout@v4
+
+      - name : Setup Nodejs
+        uses : actions/setup-node@v3
+        with :
+          node-version : 18
+
+      - name : Install Project Dependencies
+        run : npm install
+
+      - name : Run Tests
+        run : npm test 
+
