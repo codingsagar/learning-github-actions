@@ -14,21 +14,25 @@ on :
 # And each job run in its own env like Windows,Linux..
 
 jobs :
+
+  # test is the first and only job we have defined in this workflow
   test : 
-    runs-on : ubuntu-latest
-  
+    runs-on : ubuntu-latest # our workflow will run on ubuntu linux
+
+    # We know from the readme file that each jobs have one or more steps
+
     steps : 
       - name : Checkout Repository
-        uses : actions/checkout@v4
+        uses : actions/checkout@v4 # this is pre-defined action in the actions marketplace read more there about what it does.
 
       - name : Setup Nodejs
-        uses : actions/setup-node@v3
+        uses : actions/setup-node@v3 # again this is a pre-defined action in the actions marketplace and it simply setups node js in the env
         with :
-          node-version : 18
+          node-version : 18 # defining the node js version we want 
 
       - name : Install Project Dependencies
-        run : npm install
+        run : npm install # then we install all the dependencies 
 
       - name : Run Tests
-        run : npm test 
+        run : npm test # running the npm command to run tests
 
